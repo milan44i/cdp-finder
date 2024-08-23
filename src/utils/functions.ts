@@ -66,11 +66,14 @@ export async function getCdpDataClosestToId(
           onProgress((closestCdps.length / targetElements) * 100)
 
           if (closestCdps.length >= targetElements) {
+            onProgress(0)
             return closestCdps
           }
         }
       }
     }
+
+    onProgress(0)
     return closestCdps
   } catch (error) {
     console.error("Error fetching CDP data:", error)
