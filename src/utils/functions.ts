@@ -42,12 +42,14 @@ export async function initializeWeb3() {
 export async function getCdpDataClosestToId(
   cdpManager: Contract<AbiObject[]>,
   cdpId: string,
-  collateralType: COLLATERAL_TYPE
+  collateralType: COLLATERAL_TYPE,
+  onProgress: (progress: number) => void
 ) {
   try {
     const closestCdps = []
     const maxSearchRange = 50
     const baseCdpId = parseInt(cdpId)
+    const targetElements = 20
 
     for (let i = 0; i <= maxSearchRange; i++) {
       const currentCdpIds = [baseCdpId + i, baseCdpId - i]
@@ -61,10 +63,11 @@ export async function getCdpDataClosestToId(
         // @ts-expect-error cdpInfo has weird type
         if (cdpInfo[3] === stringToBytes(collateralType)) {
           closestCdps.push({ id: currentCdpId, info: cdpInfo })
-        }
+          onProgress((closestCdps.length / targetElements) * 100)
 
-        if (closestCdps.length >= 20) {
-          return closestCdps
+          if (closestCdps.length >= targetElements) {
+            return closestCdps
+          }
         }
       }
     }

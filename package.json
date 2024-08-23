@@ -13,6 +13,7 @@
     "@defisaver/tokens": "^1.5.31",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/providers": "^17.1.2",
+    "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.17.7",

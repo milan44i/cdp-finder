@@ -1,14 +1,18 @@
 "use client"
 
 import { ReactElement, useState } from "react"
+import Web3 from "web3"
+
 import CollateralSelection from "./CollateralSection"
 import CdpSearch from "./CdpSearch"
 import CdpList from "./CdpList"
-import Web3 from "web3"
-import "./style.css"
+import { Progress } from "../ui/progress/Progress"
+
 import { getCdpDataClosestToId } from "../utils/functions"
 import { COLLATERAL_TYPE } from "../utils/types"
 import { cdpManagerAbi, cdpManagerAddress } from "../utils/data"
+
+import "./style.css"
 
 // const web3 = new Web3(new Web3.providers.HttpProvider(`${baseUrl}/${apiKey}`))
 const web3 = new Web3(
@@ -26,6 +30,7 @@ export default function CdpFinder(): ReactElement {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [cdps, setCdps] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const handleSelectCollateral = (type: COLLATERAL_TYPE) => {
     setCollateralType(type)
@@ -36,7 +41,8 @@ export default function CdpFinder(): ReactElement {
     const closestCdps = await getCdpDataClosestToId(
       cdpManager,
       cdpId,
-      collateralType
+      collateralType,
+      setProgress
     )
 
     setCdps(closestCdps)
@@ -49,11 +55,7 @@ export default function CdpFinder(): ReactElement {
     <div className="flex flex-col w-3/4">
       <CollateralSelection onSelect={handleSelectCollateral} />
       <CdpSearch onSearch={handleSearchCdp} />
-      {loading ? (
-        <p className="progress-bar">Loading...</p>
-      ) : (
-        <CdpList cdps={cdps} />
-      )}
+      {loading ? <Progress value={progress} /> : <CdpList cdps={cdps} />}
     </div>
   )
 }

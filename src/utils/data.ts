@@ -24,5 +24,6 @@ export const cdpManagerAbi = [
   },
 ]
 
+// TODO: Make this work
 // export const baseUrl = process.env.INFURA_API_BASE_URL
 // export const apiKey = process.env.INFURA_API_KEY
