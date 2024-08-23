@@ -22,6 +22,12 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
     [cdpId, onSearch]
   )
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch()
+    }
+  }
+
   return (
     <div className="mb-4">
       <label className="block text-sm font-medium mb-1">
@@ -31,6 +37,7 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
         type="text"
         value={cdpId}
         onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="block w-full pl-3 pr-10 py-2 text-base text-black border-gray-300 sm:text-sm focus:outline-none rounded-md"
         placeholder="e.g., 1234"
       />

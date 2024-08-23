@@ -46,19 +46,26 @@ export async function getCdpDataClosestToId(
 ) {
   try {
     const closestCdps = []
-    const maxSearchRange = 10
+    const maxSearchRange = 50
+    const baseCdpId = parseInt(cdpId)
 
-    for (let i = -maxSearchRange; i <= maxSearchRange; i++) {
-      const currentCdpId = parseInt(cdpId) + i
-      const cdpInfo = await cdpManager.methods.getCdpInfo(currentCdpId).call()
+    for (let i = 0; i <= maxSearchRange; i++) {
+      const currentCdpIds = [baseCdpId + i, baseCdpId - i]
+      if (i === 0) currentCdpIds.pop() // remove duplicate ID
 
-      // @ts-expect-error cdpInfo has wierd type
-      if (cdpInfo[3] === stringToBytes(collateralType)) {
-        closestCdps.push({ id: currentCdpId, info: cdpInfo })
-      }
+      for (const currentCdpId of currentCdpIds) {
+        if (currentCdpId < 0) continue // Skip negative IDs
 
-      if (closestCdps.length >= 20) {
-        break
+        const cdpInfo = await cdpManager.methods.getCdpInfo(currentCdpId).call()
+
+        // @ts-expect-error cdpInfo has weird type
+        if (cdpInfo[3] === stringToBytes(collateralType)) {
+          closestCdps.push({ id: currentCdpId, info: cdpInfo })
+        }
+
+        if (closestCdps.length >= 20) {
+          return closestCdps
+        }
       }
     }
     return closestCdps
