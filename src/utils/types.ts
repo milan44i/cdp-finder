@@ -1,8 +1,15 @@
+export type CdpInfo = {
+  collateral: bigint
+  debt: bigint
+  ilk: string
+  owner: string
+  urn: string
+  userAddr: string
+}
+
 export type Cdp = {
-  id: string
-  collateral: string
-  debt: string
-  liquidationRatio: string
+  id: number
+  info: CdpInfo
 }
 
 export type AbiObject = {

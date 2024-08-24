@@ -2,10 +2,12 @@ import { ReactElement } from "react"
 
 import "./style.css"
 import { Buffer } from "buffer"
+import { Link } from "react-router-dom"
+import { Cdp } from "@/utils/types"
+import { calculateDebt } from "../utils/helpers"
 
 type CdpListProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cdps: any[]
+  cdps: Cdp[]
   rates: Record<string, number>
 }
 
@@ -20,9 +22,6 @@ function bytesToString(hex: string): string {
 }
 
 export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
-  const calculateDebt = (debt: string, ilk: string): string =>
-    ((Number(debt) * rates[ilk]) / 10 ** 18).toFixed(4)
-
   if (cdps.length === 0) {
     return <p className="text-gray-200">No CDPs found.</p>
   }
@@ -50,12 +49,19 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
                 key={index}
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
-                <td className="px-3 sm:px-6 py-4">{cdp.id}</td>
+                <td className="px-3 sm:px-6 py-4">
+                  <Link to={`/${cdp.id}`} state={{ cpdData: cdp, rates }}>
+                    {cdp.id}
+                  </Link>
+                </td>
                 <td className="px-3 sm:px-6 py-4">
                   {bytesToString(cdp.info.ilk)}
                 </td>
                 <td className="px-3 sm:px-6 py-4">
-                  {calculateDebt(cdp.info.debt, bytesToString(cdp.info.ilk))}{" "}
+                  {calculateDebt(
+                    cdp.info.debt,
+                    rates[bytesToString(cdp.info.ilk)]
+                  )}{" "}
                   DAI
                 </td>
               </tr>

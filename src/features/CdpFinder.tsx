@@ -7,7 +7,7 @@ import CdpList from "./CdpList"
 import { Progress } from "../ui/progress/Progress"
 
 import { getCdpDataClosestToId, getRateForIlk } from "../utils/functions"
-import { COLLATERAL_TYPE } from "../utils/types"
+import { Cdp, COLLATERAL_TYPE } from "../utils/types"
 import {
   apiKey,
   baseUrl,
@@ -36,8 +36,8 @@ export default function CdpFinder(): ReactElement {
   const [collateralType, setCollateralType] = useState<COLLATERAL_TYPE>(
     COLLATERAL_TYPE.ETH
   )
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [cdps, setCdps] = useState<any[]>([])
+
+  const [cdps, setCdps] = useState<Cdp[]>([])
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)
 
@@ -58,7 +58,7 @@ export default function CdpFinder(): ReactElement {
     setLoading(false)
   }
 
-  console.log(cdps, rates)
+  console.log(cdps[7])
 
   return (
     <main className="flex flex-col gap-4 w-3/4 h-[90%]">

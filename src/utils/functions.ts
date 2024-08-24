@@ -1,9 +1,10 @@
 import Web3, { Contract } from "web3"
-import { AbiObject, COLLATERAL_TYPE } from "./types"
+import { AbiObject, Cdp, CdpInfo, COLLATERAL_TYPE } from "./types"
 import { Buffer } from "buffer"
 import { RegisteredSubscription } from "node_modules/web3-eth/lib/types/web3_eth"
 
-export function stringToBytes(str: string): string {
+// can I somehow reuse this and bytesToString?
+function stringToBytes(str: string): string {
   let n = Buffer.from(str).toString("hex")
   while (n.length < 64) n = `${n}0`
   return `0x${n}`
@@ -47,7 +48,7 @@ export async function getCdpDataClosestToId(
   onProgress: (progress: number) => void
 ) {
   try {
-    const closestCdps = []
+    const closestCdps: Cdp[] = []
     const baseCdpId = parseInt(cdpId)
     const maxSearchRange = 20
     const targetElements = 20
@@ -59,10 +60,11 @@ export async function getCdpDataClosestToId(
       for (const currentCdpId of currentCdpIds) {
         if (currentCdpId < 0) continue // Skip negative IDs
 
-        const cdpInfo = await cdpManager.methods.getCdpInfo(currentCdpId).call()
+        const cdpInfo = (await cdpManager.methods
+          .getCdpInfo(currentCdpId)
+          .call()) as CdpInfo
 
-        // @ts-expect-error cdpInfo has weird type
-        if (cdpInfo[3] === stringToBytes(collateralType)) {
+        if (cdpInfo.ilk === stringToBytes(collateralType)) {
           closestCdps.push({ id: currentCdpId, info: cdpInfo })
           onProgress((closestCdps.length / targetElements) * 100)
 
