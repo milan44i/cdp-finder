@@ -72,7 +72,13 @@ export default function CdpPage(): ReactElement {
           Collateral Amount: {collateralAmount} {collateralType.slice(0, -2)}
         </p>
         <p>Debt Amount: {debtAmount} DAI</p>
-        <p>Collateralization Ratio: {collateralizationRatio.toFixed(2)}%</p>
+        <p>
+          Collateralization Ratio:{" "}
+          {isNaN(collateralizationRatio)
+            ? "0.00"
+            : collateralizationRatio.toFixed(2)}
+          %
+        </p>
         <p>Liquidation Ratio: {liquidationRatio * 100}%</p>
         <p>Max Debt Without Liquidation: {maxDebtWithoutLiquidation} DAI</p>
         <p>
