@@ -1,5 +1,3 @@
-"use client"
-
 import { ReactElement, useState } from "react"
 import Web3 from "web3"
 
@@ -8,9 +6,14 @@ import CdpSearch from "./CdpSearch"
 import CdpList from "./CdpList"
 import { Progress } from "../ui/progress/Progress"
 
-import { getCdpDataClosestToId } from "../utils/functions"
+import { getCdpDataClosestToId, getRateForIlk } from "../utils/functions"
 import { COLLATERAL_TYPE } from "../utils/types"
-import { cdpManagerAbi, cdpManagerAddress } from "../utils/data"
+import {
+  cdpManagerAbi,
+  cdpManagerAddress,
+  vatAbi,
+  vatContractAddress,
+} from "../utils/data"
 
 import "./style.css"
 
@@ -22,6 +25,16 @@ const web3 = new Web3(
 )
 
 const cdpManager = new web3.eth.Contract(cdpManagerAbi, cdpManagerAddress)
+const vatContract = new web3.eth.Contract(vatAbi, vatContractAddress)
+
+const rateEth = await getRateForIlk(vatContract, web3, "ETH-A")
+const rateBtc = await getRateForIlk(vatContract, web3, "WTBC-A")
+const rateUsdt = await getRateForIlk(vatContract, web3, "USDT-A")
+const rates = {
+  "ETH-A": Number(rateEth) / 10 ** 9,
+  "WTBC-A": Number(rateBtc) / 10 ** 9,
+  "USDT-A": Number(rateUsdt) / 10 ** 9,
+}
 
 export default function CdpFinder(): ReactElement {
   const [collateralType, setCollateralType] = useState<COLLATERAL_TYPE>(
@@ -49,13 +62,17 @@ export default function CdpFinder(): ReactElement {
     setLoading(false)
   }
 
-  console.log(cdps)
+  console.log(cdps, rates)
 
   return (
     <div className="flex flex-col w-3/4">
       <CollateralSelection onSelect={handleSelectCollateral} />
       <CdpSearch onSearch={handleSearchCdp} />
-      {loading ? <Progress value={progress} /> : <CdpList cdps={cdps} />}
+      {loading ? (
+        <Progress value={progress} />
+      ) : (
+        <CdpList cdps={cdps} rates={rates} />
+      )}
     </div>
   )
 }

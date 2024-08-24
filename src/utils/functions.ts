@@ -1,6 +1,7 @@
-import { Contract } from "web3"
+import Web3, { Contract } from "web3"
 import { AbiObject, COLLATERAL_TYPE } from "./types"
 import { Buffer } from "buffer"
+import { RegisteredSubscription } from "node_modules/web3-eth/lib/types/web3_eth"
 
 export function stringToBytes(str: string): string {
   let n = Buffer.from(str).toString("hex")
@@ -78,5 +79,22 @@ export async function getCdpDataClosestToId(
   } catch (error) {
     console.error("Error fetching CDP data:", error)
     return []
+  }
+}
+
+export async function getRateForIlk(
+  vatContract: Contract<AbiObject[]>,
+  web3: Web3<RegisteredSubscription>,
+  ilk: string
+) {
+  try {
+    const rateInfo = await vatContract.methods
+      .ilks(web3.utils.padRight(web3.utils.asciiToHex(ilk), 64))
+      .call()
+    // @ts-expect-error rateInfo has weird type
+    const rate = rateInfo.rate
+    return web3.utils.fromWei(rate, "ether")
+  } catch (error) {
+    console.error("Error fetching rate for ilk:", error)
   }
 }
