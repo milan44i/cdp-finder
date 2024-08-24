@@ -33,7 +33,7 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
   }
 
   return (
-    <div className="mb-4">
+    <div>
       <label className="block text-sm font-medium mb-1">
         Enter Rough CDP ID
       </label>
@@ -50,7 +50,7 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
       )}
       <button
         onClick={handleSearch}
-        className="mt-2 w-full inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="mt-4 w-full inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Search
       </button>

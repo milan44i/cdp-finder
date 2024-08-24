@@ -26,7 +26,7 @@ export default function CollateralSelection({
   }
 
   return (
-    <div className="mb-4">
+    <div>
       <label className="block text-sm font-medium mb-1">
         Select Collateral Type
       </label>

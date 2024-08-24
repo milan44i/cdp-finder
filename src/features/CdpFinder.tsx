@@ -61,7 +61,7 @@ export default function CdpFinder(): ReactElement {
   console.log(cdps, rates)
 
   return (
-    <div className="flex flex-col w-3/4">
+    <main className="flex flex-col gap-4 w-3/4 h-[90%]">
       <CollateralSelection onSelect={handleSelectCollateral} />
       <CdpSearch onSearch={handleSearchCdp} />
       {loading ? (
@@ -69,6 +69,6 @@ export default function CdpFinder(): ReactElement {
       ) : (
         <CdpList cdps={cdps} rates={rates} />
       )}
-    </div>
+    </main>
   )
 }
