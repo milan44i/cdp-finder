@@ -48,8 +48,8 @@ export async function getCdpDataClosestToId(
 ) {
   try {
     const closestCdps = []
-    const maxSearchRange = 50
     const baseCdpId = parseInt(cdpId)
+    const maxSearchRange = 20
     const targetElements = 20
 
     for (let i = 0; i <= maxSearchRange; i++) {

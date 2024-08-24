@@ -9,6 +9,8 @@ import { Progress } from "../ui/progress/Progress"
 import { getCdpDataClosestToId, getRateForIlk } from "../utils/functions"
 import { COLLATERAL_TYPE } from "../utils/types"
 import {
+  apiKey,
+  baseUrl,
   cdpManagerAbi,
   cdpManagerAddress,
   vatAbi,
@@ -17,13 +19,7 @@ import {
 
 import "./style.css"
 
-// const web3 = new Web3(new Web3.providers.HttpProvider(`${baseUrl}/${apiKey}`))
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(
-    "https://mainnet.infura.io/v3/1e536adfba674240898ab240ea8066cd"
-  )
-)
-
+const web3 = new Web3(new Web3.providers.HttpProvider(`${baseUrl}/${apiKey}`))
 const cdpManager = new web3.eth.Contract(cdpManagerAbi, cdpManagerAddress)
 const vatContract = new web3.eth.Contract(vatAbi, vatContractAddress)
 
@@ -32,7 +28,7 @@ const rateBtc = await getRateForIlk(vatContract, web3, "WTBC-A")
 const rateUsdt = await getRateForIlk(vatContract, web3, "USDT-A")
 const rates = {
   "ETH-A": Number(rateEth) / 10 ** 9,
-  "WTBC-A": Number(rateBtc) / 10 ** 9,
+  "WTBC-A": Number(rateBtc) / 10 ** 9, // rate for btc is 0
   "USDT-A": Number(rateUsdt) / 10 ** 9,
 }
 

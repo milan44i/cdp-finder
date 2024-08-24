@@ -33,13 +33,13 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3 text-nowrap">
+              <th scope="col" className="px-3 sm:px-6 py-3 text-nowrap">
                 CDP ID
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-3 sm:px-6 py-3">
                 Collateral
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-3 sm:px-6 py-3">
                 Debt
               </th>
             </tr>
@@ -50,9 +50,11 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
                 key={index}
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
-                <td className="px-6 py-4">{cdp.id}</td>
-                <td className="px-6 py-4">{bytesToString(cdp.info.ilk)}</td>
-                <td className="px-6 py-4">
+                <td className="px-3 sm:px-6 py-4">{cdp.id}</td>
+                <td className="px-3 sm:px-6 py-4">
+                  {bytesToString(cdp.info.ilk)}
+                </td>
+                <td className="px-3 sm:px-6 py-4">
                   {calculateDebt(cdp.info.debt, bytesToString(cdp.info.ilk))}{" "}
                   DAI
                 </td>
