@@ -4,7 +4,7 @@ import "./style.css"
 import { Buffer } from "buffer"
 import { Link } from "react-router-dom"
 import { Cdp } from "@/utils/types"
-import { calculateDebt } from "../utils/helpers"
+import { calculateDebt, formatNumber } from "../utils/helpers"
 
 type CdpListProps = {
   cdps: Cdp[]
@@ -58,9 +58,11 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
                   {bytesToString(cdp.info.ilk)}
                 </td>
                 <td className="px-3 sm:px-6 py-4">
-                  {calculateDebt(
-                    cdp.info.debt,
-                    rates[bytesToString(cdp.info.ilk)]
+                  {formatNumber(
+                    calculateDebt(
+                      cdp.info.debt,
+                      rates[bytesToString(cdp.info.ilk)]
+                    )
                   )}{" "}
                   DAI
                 </td>

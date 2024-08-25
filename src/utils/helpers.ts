@@ -25,10 +25,17 @@ export const getLiquidationRatio = (collateralType: COLLATERAL_TYPE) => {
   }
 }
 
+export function formatNumber(number: number): string {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4,
+  }).format(number)
+}
+
 export function calculateDebt(debt: bigint, rate: number) {
-  return Number(((Number(debt) * rate) / 10 ** 18).toFixed(4))
+  return Number((Number(debt) * rate) / 10 ** 18)
 }
 
 export function calculateCollateral(collateral: bigint) {
-  return Number((Number(collateral) / 10 ** 18).toFixed(4))
+  return Number(Number(collateral) / 10 ** 18)
 }

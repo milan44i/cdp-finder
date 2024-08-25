@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom"
 import Web3 from "web3"
 import { Buffer } from "buffer"
 
-import { calculateCollateral, calculateDebt } from "../utils/helpers"
+import {
+  calculateCollateral,
+  calculateDebt,
+  formatNumber,
+} from "../utils/helpers"
 import { Cdp, COLLATERAL_TYPE } from "../utils/types"
 import { getCollateralPrice, getLiquidationRatio } from "../utils/helpers"
 // @ts-expect-error ?react
@@ -48,13 +52,10 @@ export default function CdpPage(): ReactElement {
   const debtAmount = calculateDebt(cdp.info.debt, rates[collateralType])
   const collateralValue = collateralAmount * collateralPrice
   const collateralizationRatio = (collateralValue / debtAmount) * 100
-  const maxDebtWithoutLiquidation = (
-    collateralValue / liquidationRatio
-  ).toFixed(2)
-  const maxCollateralWithoutLiquidation = (
-    (debtAmount * liquidationRatio) /
-    collateralPrice
-  ).toFixed(2)
+  const maxDebtWithoutLiquidation = Number(collateralValue / liquidationRatio)
+  const maxCollateralWithoutLiquidation = Number(
+    (debtAmount * liquidationRatio) / collateralPrice
+  )
 
   const signMessage = async () => {
     if (isConnected && window.ethereum) {
@@ -74,9 +75,9 @@ export default function CdpPage(): ReactElement {
     },
     {
       label: "Collateral Amount",
-      value: `${collateralAmount} ${collateralType.slice(0, -2)}`,
+      value: `${formatNumber(collateralAmount)} ${collateralType.slice(0, -2)}`,
     },
-    { label: "Debt Amount", value: `${debtAmount} DAI` },
+    { label: "Debt Amount", value: `${formatNumber(debtAmount)} DAI` },
     {
       label: "Collateralization Ratio",
       value: `${
@@ -88,14 +89,13 @@ export default function CdpPage(): ReactElement {
     { label: "Liquidation Ratio", value: `${liquidationRatio * 100}%` },
     {
       label: "Max Debt Without Liquidation",
-      value: `${maxDebtWithoutLiquidation} DAI`,
+      value: `${formatNumber(maxDebtWithoutLiquidation)} DAI`,
     },
     {
       label: "Max Collateral Without Liquidation",
-      value: `${maxCollateralWithoutLiquidation} ${collateralType.slice(
-        0,
-        -2
-      )}`,
+      value: `${formatNumber(
+        maxCollateralWithoutLiquidation
+      )} ${collateralType.slice(0, -2)}`,
     },
   ]
 
