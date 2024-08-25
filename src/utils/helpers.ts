@@ -1,4 +1,4 @@
-import { COLLATERAL_TYPE } from "./types"
+import { COLLATERAL_TYPE } from './types'
 
 export const getCollateralPrice = (collateralType: COLLATERAL_TYPE) => {
   switch (collateralType) {
@@ -26,7 +26,7 @@ export const getLiquidationRatio = (collateralType: COLLATERAL_TYPE) => {
 }
 
 export function formatNumber(number: number): string {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 4,
   }).format(number)

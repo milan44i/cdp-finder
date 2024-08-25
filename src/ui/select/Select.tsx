@@ -1,11 +1,11 @@
-import * as React from "react"
-import * as SelectPrimitive from "@radix-ui/react-select"
-import { twMerge } from "tailwind-merge"
+import * as React from 'react'
+import * as SelectPrimitive from '@radix-ui/react-select'
+import { twMerge } from 'tailwind-merge'
 
 // @ts-expect-error ?react
-import CheckIcon from "../../assets/icons/check.svg?react"
+import CheckIcon from '../../assets/icons/check.svg?react'
 // @ts-expect-error ?react
-import ChevronSmallDownIcon from "../../assets/icons/chevron-small-down.svg?react"
+import ChevronSmallDownIcon from '../../assets/icons/chevron-small-down.svg?react'
 
 const Select = SelectPrimitive.Root
 const SelectGroup = SelectPrimitive.Group
@@ -18,8 +18,8 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={twMerge(
-      "flex h-9 w-full items-center justify-between rounded-md bg-white !text-black px-3 py-2 text-sm text-divider-purple ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      className
+      'flex h-9 w-full items-center justify-between rounded-md bg-white !text-black px-3 py-2 text-sm text-divider-purple ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      className,
     )}
     {...props}
   >
@@ -37,10 +37,7 @@ const SelectScrollUpButton = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
     ref={ref}
-    className={twMerge(
-      "flex cursor-default items-center justify-center py-1",
-      className
-    )}
+    className={twMerge('flex cursor-default items-center justify-center py-1', className)}
     {...props}
   >
     <ChevronSmallDownIcon className="rotate-180 w-6 h-6" />
@@ -54,30 +51,26 @@ const SelectScrollDownButton = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
     ref={ref}
-    className={twMerge(
-      "flex cursor-default items-center justify-center py-1",
-      className
-    )}
+    className={twMerge('flex cursor-default items-center justify-center py-1', className)}
     {...props}
   >
     <ChevronSmallDownIcon className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
 ))
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
 
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
+>(({ className, children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
       className={twMerge(
-        "relative z-50 w-full max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-white text-black",
-        position === "popper" &&
-          "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-        className
+        'relative z-50 w-full max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-white text-black',
+        position === 'popper' &&
+          'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+        className,
       )}
       position={position}
       {...props}
@@ -85,8 +78,8 @@ const SelectContent = React.forwardRef<
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={twMerge(
-          position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+          position === 'popper' &&
+            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
         )}
       >
         {children}
@@ -103,10 +96,7 @@ const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
     ref={ref}
-    className={twMerge(
-      "py-1.5 pl-8 pr-2 text-sm text-black font-semibold",
-      className
-    )}
+    className={twMerge('py-1.5 pl-8 pr-2 text-sm text-black font-semibold', className)}
     {...props}
   />
 ))
@@ -119,8 +109,8 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={twMerge(
-      "relative flex w-full px-4 cursor-default select-none items-center rounded-sm py-2 text-sm text-black leading-6 text-divider-purple outline-none hover:bg-gray-100 focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      'relative flex w-full px-4 cursor-default select-none items-center rounded-sm py-2 text-sm text-black leading-6 text-divider-purple outline-none hover:bg-gray-100 focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className,
     )}
     {...props}
   >
@@ -141,7 +131,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={twMerge("-mx-1 my-1 h-px bg-muted", className)}
+    className={twMerge('-mx-1 my-1 h-px bg-muted', className)}
     {...props}
   />
 ))

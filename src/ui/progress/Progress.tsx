@@ -1,7 +1,7 @@
-import * as React from "react"
-import * as ProgressPrimitive from "@radix-ui/react-progress"
+import * as React from 'react'
+import * as ProgressPrimitive from '@radix-ui/react-progress'
 
-import { twMerge } from "tailwind-merge"
+import { twMerge } from 'tailwind-merge'
 
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
@@ -9,10 +9,7 @@ const Progress = React.forwardRef<
 >(({ className, value, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
-    className={twMerge(
-      "relative h-4 w-full overflow-hidden rounded-full bg-white",
-      className
-    )}
+    className={twMerge('relative h-4 w-full overflow-hidden rounded-full bg-white', className)}
     {...props}
   >
     <ProgressPrimitive.Indicator

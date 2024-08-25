@@ -29,7 +29,7 @@ export type AbiObject = {
 }
 
 export enum COLLATERAL_TYPE {
-  ETH = "ETH-A",
-  WBTC = "WBTC-A",
-  USDC = "USDC-A",
+  ETH = 'ETH-A',
+  WBTC = 'WBTC-A',
+  USDC = 'USDC-A',
 }

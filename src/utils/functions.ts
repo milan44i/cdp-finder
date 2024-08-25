@@ -1,11 +1,11 @@
-import Web3, { Contract } from "web3"
-import { AbiObject, Cdp, CdpInfo, COLLATERAL_TYPE } from "./types"
-import { Buffer } from "buffer"
-import { RegisteredSubscription } from "node_modules/web3-eth/lib/types/web3_eth"
+import Web3, { Contract } from 'web3'
+import { AbiObject, Cdp, CdpInfo, COLLATERAL_TYPE } from './types'
+import { Buffer } from 'buffer'
+import { RegisteredSubscription } from 'node_modules/web3-eth/lib/types/web3_eth'
 
 // can I somehow reuse this and bytesToString?
 function stringToBytes(str: string): string {
-  let n = Buffer.from(str).toString("hex")
+  let n = Buffer.from(str).toString('hex')
   while (n.length < 64) n = `${n}0`
   return `0x${n}`
 }
@@ -14,7 +14,7 @@ export async function getCdpDataClosestToId(
   cdpManager: Contract<AbiObject[]>,
   cdpId: string,
   collateralType: COLLATERAL_TYPE,
-  onProgress: (progress: number) => void
+  onProgress: (progress: number) => void,
 ) {
   try {
     const closestCdps: Cdp[] = []
@@ -29,9 +29,7 @@ export async function getCdpDataClosestToId(
       for (const currentCdpId of currentCdpIds) {
         if (currentCdpId < 0) continue // Skip negative IDs
 
-        const cdpInfo = (await cdpManager.methods
-          .getCdpInfo(currentCdpId)
-          .call()) as CdpInfo
+        const cdpInfo = (await cdpManager.methods.getCdpInfo(currentCdpId).call()) as CdpInfo
 
         if (cdpInfo.ilk === stringToBytes(collateralType)) {
           closestCdps.push({ id: currentCdpId, info: cdpInfo })
@@ -48,7 +46,7 @@ export async function getCdpDataClosestToId(
     onProgress(0)
     return closestCdps
   } catch (error) {
-    console.error("Error fetching CDP data:", error)
+    console.error('Error fetching CDP data:', error)
     return []
   }
 }
@@ -56,7 +54,7 @@ export async function getCdpDataClosestToId(
 export async function getRateForIlk(
   vatContract: Contract<AbiObject[]>,
   web3: Web3<RegisteredSubscription>,
-  ilk: string
+  ilk: string,
 ) {
   try {
     const rateInfo = await vatContract.methods
@@ -64,8 +62,8 @@ export async function getRateForIlk(
       .call()
     // @ts-expect-error rateInfo has weird type
     const rate = rateInfo.rate
-    return web3.utils.fromWei(rate, "ether")
+    return web3.utils.fromWei(rate, 'ether')
   } catch (error) {
-    console.error("Error fetching rate for ilk:", error)
+    console.error('Error fetching rate for ilk:', error)
   }
 }

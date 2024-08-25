@@ -1,11 +1,11 @@
-import { ReactElement } from "react"
-import { Route, Routes } from "react-router-dom"
-import { MetaMaskInpageProvider } from "@metamask/providers"
+import { ReactElement } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { MetaMaskInpageProvider } from '@metamask/providers'
 
-import CdpFinder from "./features/CdpFinder/CdpFinder"
-import Header from "./features/Header/Header"
-import CdpPage from "./features/CdpPage/CdpPage"
-import ErrorPage from "./features/ErrorPage"
+import CdpFinder from './features/CdpFinder/CdpFinder'
+import Header from './features/Header/Header'
+import CdpPage from './features/CdpPage/CdpPage'
+import ErrorPage from './features/ErrorPage'
 
 declare global {
   interface Window {

@@ -1,10 +1,10 @@
-import { ReactElement } from "react"
+import { ReactElement } from 'react'
 
-import "./style.css"
-import { Buffer } from "buffer"
-import { Link } from "react-router-dom"
-import { Cdp } from "@/utils/types"
-import { calculateDebt, formatNumber } from "../../utils/helpers"
+import './style.css'
+import { Buffer } from 'buffer'
+import { Link } from 'react-router-dom'
+import { Cdp } from '@/utils/types'
+import { calculateDebt, formatNumber } from '../../utils/helpers'
 
 type CdpListProps = {
   cdps: Cdp[]
@@ -14,10 +14,10 @@ type CdpListProps = {
 // has to be defined here because of Buffer import
 function bytesToString(hex: string): string {
   return (
-    Buffer.from(hex.replace(/^0x/, ""), "hex")
+    Buffer.from(hex.replace(/^0x/, ''), 'hex')
       .toString()
       // eslint-disable-next-line no-control-regex
-      .replace(/\x00/g, "")
+      .replace(/\x00/g, '')
   )
 }
 
@@ -54,17 +54,9 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
                     {cdp.id}
                   </Link>
                 </td>
+                <td className="px-3 sm:px-6 py-4">{bytesToString(cdp.info.ilk)}</td>
                 <td className="px-3 sm:px-6 py-4">
-                  {bytesToString(cdp.info.ilk)}
-                </td>
-                <td className="px-3 sm:px-6 py-4">
-                  {formatNumber(
-                    calculateDebt(
-                      cdp.info.debt,
-                      rates[bytesToString(cdp.info.ilk)]
-                    )
-                  )}{" "}
-                  DAI
+                  {formatNumber(calculateDebt(cdp.info.debt, rates[bytesToString(cdp.info.ilk)]))} DAI
                 </td>
               </tr>
             ))}
