@@ -118,13 +118,14 @@ export default function CdpPage(): ReactElement {
         {isConnected ? (
           <div className="py-4">
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
+              disabled={!!signature}
               onClick={signMessage}
             >
               Sign "This is my CDP"
             </button>
             {signature && (
-              <div className="mt-4">
+              <div className="mt-4 text-blue-950">
                 <p>Signature:</p>
                 <p className="break-words">{signature}</p>
               </div>
