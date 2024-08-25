@@ -1,3 +1,5 @@
+import Web3 from 'web3'
+
 export const cdpManagerAddress = '0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d'
 
 export const cdpManagerAbi = [
@@ -366,3 +368,7 @@ export const vatAbi = [
 
 export const baseUrl = import.meta.env.VITE_INFURA_API_BASE_URL
 export const apiKey = import.meta.env.VITE_INFURA_API_KEY
+
+export const web3 = new Web3(new Web3.providers.HttpProvider(`${baseUrl}/${apiKey}`))
+export const cdpManager = new web3.eth.Contract(cdpManagerAbi, cdpManagerAddress)
+export const vatContract = new web3.eth.Contract(vatAbi, vatContractAddress)

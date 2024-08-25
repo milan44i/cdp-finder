@@ -92,7 +92,7 @@ export default function CdpPage(): ReactElement {
 
   return (
     <>
-      <div className="container flex flex-col gap-4 mx-auto sm:px-8 px-4 py-4 bg-white rounded-lg">
+      <main className="container flex flex-col gap-4 mx-auto sm:px-8 px-4 py-4 bg-white rounded-lg">
         <h1 className="text-2xl font-semibold text-blue-950 py-4 border-b">CDP {cdp.id} Details</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 py-4 border-b">
           {items.map((item, index) => (
@@ -102,7 +102,7 @@ export default function CdpPage(): ReactElement {
         {isConnected ? (
           <div className="py-4">
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded disabled:bg-gray-400"
+              className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded disabled:bg-gray-400"
               disabled={!!signature}
               onClick={signMessage}
             >
@@ -118,7 +118,7 @@ export default function CdpPage(): ReactElement {
         ) : (
           <p>Please connect to MetaMask to sign the message.</p>
         )}
-      </div>
+      </main>
       <Link
         to="/"
         className="flex items-center bg-white text-blue-500 hover:text-blue-400 p-2 pr-4 rounded-lg font-medium w-fit"
