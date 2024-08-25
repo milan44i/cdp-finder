@@ -1,8 +1,7 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome!
 
-Currently, two official plugins are available:
+This frontend tool allows you to search for CDPs (Collateralized Debt Positions) on the [this](https://etherscan.io/address/0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d#readContract) smart contract by ID and collateral type. The tool displays the 20 CDPs with the closest IDs to your search query. By clicking on any ID in the table, you can view detailed information about that CDP, including the collateralization ratio, liquidation ratio, maximum debt without liquidation, and maximum collateral without liquidation. Used remote procedure calls with infura and web3.js library to communicate with smart contract and retrieve data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Some tools and libraries used include RadixUI, Tailwind, Web3.js, Infura, Metamask.
