@@ -47,6 +47,7 @@ export async function getCdpDataClosestToId(
     return closestCdps
   } catch (error) {
     console.error('Error fetching CDP data:', error)
+    onProgress(0)
     return []
   }
 }

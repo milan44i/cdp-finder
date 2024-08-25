@@ -2,10 +2,11 @@ import { ReactElement, useCallback, useState } from 'react'
 import debounce from 'lodash/debounce'
 
 type CdpSearchProps = {
+  loading: boolean
   onSearch: (cdpId: string) => void
 }
 
-export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
+export default function CdpSearch({ loading, onSearch }: CdpSearchProps): ReactElement {
   const [cdpId, setCdpId] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -13,20 +14,17 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
     setCdpId(value)
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handleSearch = useCallback(
-    debounce(() => {
-      setErrorMessage('')
-      if (cdpId && !isNaN(Number(cdpId))) {
-        onSearch(cdpId)
-      } else if (cdpId.length === 0) {
-        setErrorMessage('Please fill in the ID')
-      } else {
-        setErrorMessage('Please type in numbers only')
-      }
-    }, 300),
-    [cdpId, onSearch],
-  )
+  const handleSearch = debounce(() => {
+    if (loading) return
+    setErrorMessage('')
+    if (cdpId && !isNaN(Number(cdpId))) {
+      onSearch(cdpId)
+    } else if (cdpId.length === 0) {
+      setErrorMessage('Please fill in the ID')
+    } else {
+      setErrorMessage('Please type in numbers only')
+    }
+  }, 300)
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
