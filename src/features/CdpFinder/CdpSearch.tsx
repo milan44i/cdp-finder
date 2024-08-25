@@ -19,6 +19,8 @@ export default function CdpSearch({ onSearch }: CdpSearchProps): ReactElement {
       setErrorMessage('')
       if (cdpId && !isNaN(Number(cdpId))) {
         onSearch(cdpId)
+      } else if (cdpId.length === 0) {
+        setErrorMessage('Please fill in the ID')
       } else {
         setErrorMessage('Please type in numbers only')
       }
