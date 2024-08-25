@@ -22,18 +22,17 @@ function bytesToString(hex: string): string {
 
 export default function CdpPage(): ReactElement {
   const { state } = useLocation()
-  const cdp = state.cpdData as Cdp
-  const rates = state.rates as Record<string, number>
   const [isConnected, setIsConnected] = useState(false)
   const [signature, setSignature] = useState("")
-  // const [cdp, setCdp] = useState<Cdp | null>(null)
+
+  const cdp = state.cpdData as Cdp
+  const rates = state.rates as Record<string, number>
 
   const collateralType = bytesToString(cdp.info.ilk) as COLLATERAL_TYPE
   const collateralPrice = getCollateralPrice(collateralType as COLLATERAL_TYPE)
   const liquidationRatio = getLiquidationRatio(
     collateralType as COLLATERAL_TYPE
   )
-
   const collateralAmount = calculateCollateral(cdp.info.collateral)
   const debtAmount = calculateDebt(cdp.info.debt, rates[collateralType])
   const collateralValue = collateralAmount * collateralPrice
@@ -47,9 +46,7 @@ export default function CdpPage(): ReactElement {
   ).toFixed(2)
 
   useEffect(() => {
-    // Check if the user is connected through Metamask
     if (window.ethereum) {
-      // const web3 = new Web3(window.ethereum)
       window.ethereum.enable().then(() => {
         setIsConnected(true)
       })

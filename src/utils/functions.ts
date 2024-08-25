@@ -10,37 +10,6 @@ function stringToBytes(str: string): string {
   return `0x${n}`
 }
 
-export async function getCdpData(
-  cdpManager: Contract<AbiObject[]>,
-  cdpId: string
-) {
-  try {
-    const urn = await cdpManager.methods.urns(cdpId).call()
-    const owner = await cdpManager.methods.owns(cdpId).call()
-    const vatAddress = await cdpManager.methods.vat().call()
-
-    console.log(`CDP ${cdpId} is owned by: ${owner}`)
-    console.log(`Vault Address (Urn): ${urn}`)
-    console.log(`Vat Contract Address: ${vatAddress}`)
-
-    // Additional calls can be made to the Vat contract to get more detailed data
-  } catch (error) {
-    console.error("Error fetching CDP data:", error)
-  }
-}
-
-export async function initializeWeb3() {
-  const provider = window.ethereum
-
-  if (provider) {
-    // const web3 = new Web3(provider)
-    // Request account access if needed
-    await provider.request({ method: "eth_requestAccounts" })
-  } else {
-    console.error("Please install Metamask!")
-  }
-}
-
 export async function getCdpDataClosestToId(
   cdpManager: Contract<AbiObject[]>,
   cdpId: string,

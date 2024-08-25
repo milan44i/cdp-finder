@@ -35,7 +35,7 @@ export default function Header(): ReactElement {
 
   useEffect(() => {
     connectWallet()
-    // @ts-expect-error wierd type
+    // @ts-expect-error wierd arg type
     window.ethereum?.on("accountsChanged", handleAccountsChanged)
 
     return () => {

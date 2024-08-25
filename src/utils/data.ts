@@ -1,4 +1,4 @@
-export const cdpManagerAddress = "0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d" // CDP Manager contract address
+export const cdpManagerAddress = "0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d"
 
 export const cdpManagerAbi = [
   {
@@ -24,7 +24,7 @@ export const cdpManagerAbi = [
   },
 ]
 
-export const vatContractAddress = "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b" // Vat contract address
+export const vatContractAddress = "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b"
 export const vatAbi = [
   {
     inputs: [],
@@ -364,6 +364,5 @@ export const vatAbi = [
   },
 ]
 
-// TODO: Make this work
 export const baseUrl = import.meta.env.VITE_INFURA_API_BASE_URL
 export const apiKey = import.meta.env.VITE_INFURA_API_KEY
