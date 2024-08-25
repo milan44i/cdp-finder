@@ -4,7 +4,7 @@ import "./style.css"
 import { Buffer } from "buffer"
 import { Link } from "react-router-dom"
 import { Cdp } from "@/utils/types"
-import { calculateDebt, formatNumber } from "../utils/helpers"
+import { calculateDebt, formatNumber } from "../../utils/helpers"
 
 type CdpListProps = {
   cdps: Cdp[]

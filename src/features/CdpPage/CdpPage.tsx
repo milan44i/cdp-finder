@@ -7,13 +7,13 @@ import {
   calculateCollateral,
   calculateDebt,
   formatNumber,
-} from "../utils/helpers"
-import { Cdp, COLLATERAL_TYPE } from "../utils/types"
-import { getCollateralPrice, getLiquidationRatio } from "../utils/helpers"
+} from "../../utils/helpers"
+import { Cdp, COLLATERAL_TYPE } from "../../utils/types"
+import { getCollateralPrice, getLiquidationRatio } from "../../utils/helpers"
 // @ts-expect-error ?react
-import ChevronSmallDownIcon from "../assets/icons/chevron-small-down.svg?react"
+import ChevronSmallDownIcon from "../../assets/icons/chevron-small-down.svg?react"
 import { InfoItem } from "./InfoItem"
-import ErrorPage from "./ErrorPage"
+import ErrorPage from "../ErrorPage"
 
 // has to be defined here because of Buffer import
 function bytesToString(hex: string): string {

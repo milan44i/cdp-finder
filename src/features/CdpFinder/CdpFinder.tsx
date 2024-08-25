@@ -4,10 +4,10 @@ import Web3 from "web3"
 import CollateralSelection from "./CollateralSection"
 import CdpSearch from "./CdpSearch"
 import CdpList from "./CdpList"
-import { Progress } from "../ui/progress/Progress"
+import { Progress } from "../../ui/progress/Progress"
 
-import { getCdpDataClosestToId, getRateForIlk } from "../utils/functions"
-import { Cdp, COLLATERAL_TYPE } from "../utils/types"
+import { getCdpDataClosestToId, getRateForIlk } from "../../utils/functions"
+import { Cdp, COLLATERAL_TYPE } from "../../utils/types"
 import {
   apiKey,
   baseUrl,
@@ -15,7 +15,7 @@ import {
   cdpManagerAddress,
   vatAbi,
   vatContractAddress,
-} from "../utils/data"
+} from "../../utils/data"
 
 import "./style.css"
 
@@ -57,8 +57,6 @@ export default function CdpFinder(): ReactElement {
     setCdps(closestCdps)
     setLoading(false)
   }
-
-  console.log(cdps[7])
 
   return (
     <main className="flex flex-col gap-4 w-3/4 h-[90%]">

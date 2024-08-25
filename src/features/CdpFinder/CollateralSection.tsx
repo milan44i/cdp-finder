@@ -5,8 +5,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select/Select"
-import { COLLATERAL_TYPE } from "../utils/types"
+} from "../../ui/select/Select"
+import { COLLATERAL_TYPE } from "../../utils/types"
 
 type CollateralSelectionProps = {
   onSelect: (collateral: COLLATERAL_TYPE) => void
