@@ -32,9 +32,14 @@ export default function CdpPage(): ReactElement {
 
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.enable().then(() => {
-        setIsConnected(true)
-      })
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then(() => {
+          setIsConnected(true)
+        })
+        .catch((error) => {
+          console.error("Error connecting to MetaMask:", error)
+        })
     }
   }, [])
 
@@ -83,7 +88,7 @@ export default function CdpPage(): ReactElement {
       value: `${
         isNaN(collateralizationRatio)
           ? "0.00"
-          : collateralizationRatio.toFixed(2)
+          : formatNumber(collateralizationRatio)
       }%`,
     },
     { label: "Liquidation Ratio", value: `${liquidationRatio * 100}%` },
