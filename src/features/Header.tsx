@@ -44,11 +44,11 @@ export default function Header(): ReactElement {
   }, [])
 
   return (
-    <header className="hidden sm:flex justify-between w-full px-20">
+    <header className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center w-full px-20">
       <Link to="/">
         <h1 className="text-3xl font-bold">CDP Finder</h1>
       </Link>
-      <div>
+      <div className="sm:text-base text-sm">
         {account ? (
           <p>Connected account: {account}</p>
         ) : (

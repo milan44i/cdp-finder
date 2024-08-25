@@ -6,6 +6,9 @@ import { Buffer } from "buffer"
 import { calculateCollateral, calculateDebt } from "../utils/helpers"
 import { Cdp, COLLATERAL_TYPE } from "../utils/types"
 import { getCollateralPrice, getLiquidationRatio } from "../utils/helpers"
+// @ts-expect-error ?react
+import ChevronSmallDownIcon from "../assets/icons/chevron-small-down.svg?react"
+import { InfoItem } from "./InfoItem"
 
 // has to be defined here because of Buffer import
 function bytesToString(hex: string): string {
@@ -63,53 +66,81 @@ export default function CdpPage(): ReactElement {
     }
   }
 
+  const items = [
+    {
+      label: "Collateral Type",
+      value: collateralType,
+      className: "col-span-2 md:col-span-3",
+    },
+    {
+      label: "Collateral Amount",
+      value: `${collateralAmount} ${collateralType.slice(0, -2)}`,
+    },
+    { label: "Debt Amount", value: `${debtAmount} DAI` },
+    {
+      label: "Collateralization Ratio",
+      value: `${
+        isNaN(collateralizationRatio)
+          ? "0.00"
+          : collateralizationRatio.toFixed(2)
+      }%`,
+    },
+    { label: "Liquidation Ratio", value: `${liquidationRatio * 100}%` },
+    {
+      label: "Max Debt Without Liquidation",
+      value: `${maxDebtWithoutLiquidation} DAI`,
+    },
+    {
+      label: "Max Collateral Without Liquidation",
+      value: `${maxCollateralWithoutLiquidation} ${collateralType.slice(
+        0,
+        -2
+      )}`,
+    },
+  ]
+
   return (
-    <div className="container flex flex-col gap-4 mx-auto p-4">
-      <h1 className="text-2xl font-bold">CDP Details - ID: {cdp.id}</h1>
-      <div>
-        <p>Collateral Type: {collateralType}</p>
-        <p>
-          Collateral Amount: {collateralAmount} {collateralType.slice(0, -2)}
-        </p>
-        <p>Debt Amount: {debtAmount} DAI</p>
-        <p>
-          Collateralization Ratio:{" "}
-          {isNaN(collateralizationRatio)
-            ? "0.00"
-            : collateralizationRatio.toFixed(2)}
-          %
-        </p>
-        <p>Liquidation Ratio: {liquidationRatio * 100}%</p>
-        <p>Max Debt Without Liquidation: {maxDebtWithoutLiquidation} DAI</p>
-        <p>
-          Max Collateral Without Liquidation: {maxCollateralWithoutLiquidation}{" "}
-          {collateralType.slice(0, -2)}
-        </p>
-      </div>
-      {isConnected ? (
-        <div>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded"
-            onClick={signMessage}
-          >
-            Sign "This is my CDP"
-          </button>
-          {signature && (
-            <div className="mt-4">
-              <p>Signature:</p>
-              <p className="break-words">{signature}</p>
-            </div>
-          )}
+    <>
+      <div className="container flex flex-col gap-4 mx-auto sm:px-8 px-4 py-4 bg-white rounded-lg">
+        <h1 className="text-2xl font-semibold text-blue-950 py-4 border-b">
+          CDP {cdp.id} Details
+        </h1>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 py-4 border-b">
+          {items.map((item, index) => (
+            <InfoItem
+              key={index}
+              label={item.label}
+              value={item.value}
+              className={item.className || ""}
+            />
+          ))}
         </div>
-      ) : (
-        <p>Please connect to MetaMask to sign the message.</p>
-      )}
+        {isConnected ? (
+          <div className="py-4">
+            <button
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+              onClick={signMessage}
+            >
+              Sign "This is my CDP"
+            </button>
+            {signature && (
+              <div className="mt-4">
+                <p>Signature:</p>
+                <p className="break-words">{signature}</p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <p>Please connect to MetaMask to sign the message.</p>
+        )}
+      </div>
       <Link
         to="/"
-        className="bg-white text-blue-500 hover:text-blue-400 p-2 rounded-lg font-medium w-fit"
+        className="flex items-center bg-white text-blue-500 hover:text-blue-400 p-2 pr-4 rounded-lg font-medium w-fit"
       >
+        <ChevronSmallDownIcon className="rotate-90 w-5 h-5" />
         Back to homepage
       </Link>
-    </div>
+    </>
   )
 }
