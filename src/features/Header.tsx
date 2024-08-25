@@ -1,5 +1,7 @@
 import { ReactElement, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+// @ts-expect-error ?react
+import SearchIcon from "../assets/icons/search.svg?react"
 
 export default function Header(): ReactElement {
   const [account, setAccount] = useState<string | null>(null)
@@ -45,8 +47,9 @@ export default function Header(): ReactElement {
 
   return (
     <header className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center w-full px-20">
-      <Link to="/">
+      <Link to="/" className="flex gap-1 items-center text-nowrap">
         <h1 className="text-3xl font-bold">CDP Finder</h1>
+        <SearchIcon className="w-7 h-7" />
       </Link>
       <div className="sm:text-base text-sm">
         {account ? (

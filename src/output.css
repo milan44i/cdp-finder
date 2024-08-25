@@ -564,9 +564,9 @@ video {
   }
 }
 
-@media (min-width: 860px) {
+@media (min-width: 890px) {
   .container {
-    max-width: 860px;
+    max-width: 890px;
   }
 }
 
@@ -661,6 +661,10 @@ video {
   height: 1.5rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-9 {
   height: 2.25rem;
 }
@@ -699,6 +703,10 @@ video {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-7 {
+  width: 1.75rem;
 }
 
 .w-fit {
@@ -784,6 +792,10 @@ video {
 
 .gap-0\.5 {
   gap: 0.125rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-10 {
@@ -1209,7 +1221,7 @@ body {
   }
 }
 
-@media (min-width: 860px) {
+@media (min-width: 890px) {
   .md\:col-span-3 {
     grid-column: span 3 / span 3;
   }
