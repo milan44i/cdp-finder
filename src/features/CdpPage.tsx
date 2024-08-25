@@ -9,6 +9,7 @@ import { getCollateralPrice, getLiquidationRatio } from "../utils/helpers"
 // @ts-expect-error ?react
 import ChevronSmallDownIcon from "../assets/icons/chevron-small-down.svg?react"
 import { InfoItem } from "./InfoItem"
+import ErrorPage from "./ErrorPage"
 
 // has to be defined here because of Buffer import
 function bytesToString(hex: string): string {
@@ -24,6 +25,16 @@ export default function CdpPage(): ReactElement {
   const { state } = useLocation()
   const [isConnected, setIsConnected] = useState(false)
   const [signature, setSignature] = useState("")
+
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.enable().then(() => {
+        setIsConnected(true)
+      })
+    }
+  }, [])
+
+  if (!state) return <ErrorPage />
 
   const cdp = state.cpdData as Cdp
   const rates = state.rates as Record<string, number>
@@ -44,14 +55,6 @@ export default function CdpPage(): ReactElement {
     (debtAmount * liquidationRatio) /
     collateralPrice
   ).toFixed(2)
-
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.enable().then(() => {
-        setIsConnected(true)
-      })
-    }
-  }, [])
 
   const signMessage = async () => {
     if (isConnected && window.ethereum) {
