@@ -119,7 +119,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={twMerge(
-      "relative flex w-full px-4 cursor-default select-none items-center rounded-sm py-2 text-sm text-black leading-6 text-divider-purple outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex w-full px-4 cursor-default select-none items-center rounded-sm py-2 text-sm text-black leading-6 text-divider-purple outline-none hover:bg-gray-100 focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}
