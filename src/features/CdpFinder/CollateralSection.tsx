@@ -7,11 +7,7 @@ type CollateralSelectionProps = {
 }
 
 export default function CollateralSelection({ onSelect }: CollateralSelectionProps): ReactElement {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_collateral, setCollateral] = useState<COLLATERAL_TYPE>(COLLATERAL_TYPE.ETH)
-
   const handleChange = (value: string) => {
-    setCollateral(value as COLLATERAL_TYPE)
     onSelect(value as COLLATERAL_TYPE)
   }
 
