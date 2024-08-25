@@ -5,6 +5,7 @@ import { MetaMaskInpageProvider } from "@metamask/providers"
 import CdpFinder from "./features/CdpFinder"
 import Header from "./features/Header"
 import CdpPage from "./features/CdpPage"
+import ErrorPage from "./features/ErrorPage"
 
 declare global {
   interface Window {
@@ -18,7 +19,8 @@ export default function Home(): ReactElement {
       <Header />
       <Routes>
         <Route path="/" element={<CdpFinder />} />
-        <Route path="/:cdpId" element={<CdpPage />} />
+        <Route path="/cdp/:cdpId" element={<CdpPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   )

@@ -50,7 +50,7 @@ export default function CdpList({ cdps, rates }: CdpListProps): ReactElement {
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
                 <td className="px-3 sm:px-6 py-4">
-                  <Link to={`/${cdp.id}`} state={{ cpdData: cdp, rates }}>
+                  <Link to={`/cdp/${cdp.id}`} state={{ cpdData: cdp, rates }}>
                     {cdp.id}
                   </Link>
                 </td>

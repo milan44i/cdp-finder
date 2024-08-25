@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactElement } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import Web3 from "web3"
 import { Buffer } from "buffer"
 
@@ -64,9 +64,9 @@ export default function CdpPage(): ReactElement {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">CDP Details - ID: {cdp.id}</h1>
-      <div className="mb-4">
+    <div className="container flex flex-col gap-4 mx-auto p-4">
+      <h1 className="text-2xl font-bold">CDP Details - ID: {cdp.id}</h1>
+      <div>
         <p>Collateral Type: {collateralType}</p>
         <p>
           Collateral Amount: {collateralAmount} {collateralType.slice(0, -2)}
@@ -104,6 +104,12 @@ export default function CdpPage(): ReactElement {
       ) : (
         <p>Please connect to MetaMask to sign the message.</p>
       )}
+      <Link
+        to="/"
+        className="bg-white text-blue-500 hover:text-blue-400 p-2 rounded-lg font-medium w-fit"
+      >
+        Back to homepage
+      </Link>
     </div>
   )
 }
