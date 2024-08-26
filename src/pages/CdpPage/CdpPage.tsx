@@ -1,25 +1,14 @@
 import { useState, useEffect, ReactElement } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Web3 from 'web3'
-import { Buffer } from 'buffer'
 
-import { calculateCollateral, calculateDebt, formatNumber } from '../../utils/helpers'
+import { bytesToString, calculateCollateral, calculateDebt, formatNumber } from '../../utils/helpers'
 import { Cdp, COLLATERAL_TYPE } from '../../utils/types'
 import { getCollateralPrice, getLiquidationRatio } from '../../utils/helpers'
 // @ts-expect-error ?react
 import ChevronSmallDownIcon from '../../assets/icons/chevron-small-down.svg?react'
 import { InfoItem } from './InfoItem'
 import ErrorPage from '../ErrorPage'
-
-// has to be defined here because of Buffer import
-function bytesToString(hex: string): string {
-  return (
-    Buffer.from(hex.replace(/^0x/, ''), 'hex')
-      .toString()
-      // eslint-disable-next-line no-control-regex
-      .replace(/\x00/g, '')
-  )
-}
 
 export default function CdpPage(): ReactElement {
   const { state } = useLocation()
@@ -55,12 +44,16 @@ export default function CdpPage(): ReactElement {
   const maxCollateralWithoutLiquidation = Number((debtAmount * liquidationRatio) / collateralPrice)
 
   const signMessage = async () => {
-    if (isConnected && window.ethereum) {
-      const web3 = new Web3(window.ethereum)
-      const accounts = await web3.eth.getAccounts()
-      const message = 'This is my CDP'
-      const signature = await web3.eth.personal.sign(message, accounts[0], '')
-      setSignature(signature)
+    try {
+      if (isConnected && window.ethereum) {
+        const web3 = new Web3(window.ethereum)
+        const accounts = await web3.eth.getAccounts()
+        const message = 'This is my CDP'
+        const signature = await web3.eth.personal.sign(message, accounts[0], '')
+        setSignature(signature)
+      }
+    } catch (error) {
+      console.error('Error signing message:', error)
     }
   }
 

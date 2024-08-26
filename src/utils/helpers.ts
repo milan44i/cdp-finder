@@ -1,4 +1,5 @@
 import { COLLATERAL_TYPE } from './types'
+import { Buffer } from 'buffer'
 
 export const getCollateralPrice = (collateralType: COLLATERAL_TYPE) => {
   switch (collateralType) {
@@ -38,4 +39,14 @@ export function calculateDebt(debt: bigint, rate: number) {
 
 export function calculateCollateral(collateral: bigint) {
   return Number(Number(collateral) / 10 ** 18)
+}
+
+export function bytesToString(hex: string): string {
+  return Buffer.from(hex.replace(/^0x/, ''), 'hex').toString().replace(/\x00/g, '')
+}
+
+export function stringToBytes(str: string): string {
+  let n = Buffer.from(str).toString('hex')
+  while (n.length < 64) n = `${n}0`
+  return `0x${n}`
 }

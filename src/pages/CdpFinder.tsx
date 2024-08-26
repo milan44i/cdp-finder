@@ -23,11 +23,14 @@ export default function CdpFinder(): ReactElement {
 
   const handleSearchCdp = async (cdpId: string) => {
     setLoading(true)
-
-    const closestCdps = await getCdpDataClosestToId(cdpManager, cdpId, collateralType, setProgress)
-
-    setCdps(closestCdps)
-    setLoading(false)
+    try {
+      const closestCdps = await getCdpDataClosestToId(cdpManager, cdpId, collateralType, setProgress)
+      setCdps(closestCdps)
+    } catch (error) {
+      console.error('Error fetching CDP data:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (

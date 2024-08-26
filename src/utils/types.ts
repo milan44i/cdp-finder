@@ -12,18 +12,16 @@ export type Cdp = {
   info: CdpInfo
 }
 
-export type AbiObject = {
-  inputs: {
-    internalType: string
-    name: string
-    type: string
-  }[]
+type IOType = {
+  internalType: string
   name: string
-  outputs: {
-    internalType: string
-    name: string
-    type: string
-  }[]
+  type: string
+}
+
+export type AbiObject = {
+  inputs: IOType[]
+  name: string
+  outputs: IOType[]
   stateMutability: string
   type: string
 }

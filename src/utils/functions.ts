@@ -1,15 +1,17 @@
 import Web3, { Contract } from 'web3'
 import { AbiObject, Cdp, CdpInfo, COLLATERAL_TYPE } from './types'
-import { Buffer } from 'buffer'
 import { RegisteredSubscription } from 'node_modules/web3-eth/lib/types/web3_eth'
+import { stringToBytes } from './helpers'
 
-// can I somehow reuse this and bytesToString?
-function stringToBytes(str: string): string {
-  let n = Buffer.from(str).toString('hex')
-  while (n.length < 64) n = `${n}0`
-  return `0x${n}`
-}
-
+/**
+ * Fetches twenty CDPs closest to the given CDP ID.
+ *
+ * @param {Contract<AbiObject[]>} cdpManager - The CDP manager contract instance.
+ * @param {string} cdpId - The ID of the CDP to search around.
+ * @param {COLLATERAL_TYPE} collateralType - The type of collateral to filter by.
+ * @param {(progress: number) => void} onProgress - Callback function to report progress.
+ * @returns {Promise<Cdp[]>} - A promise that resolves to an array of CDPs closest to the given ID.
+ */
 export async function getCdpDataClosestToId(
   cdpManager: Contract<AbiObject[]>,
   cdpId: string,
@@ -52,6 +54,14 @@ export async function getCdpDataClosestToId(
   }
 }
 
+/**
+ * Fetches the rate for a given ilk from the vat contract.
+ *
+ * @param {Contract<AbiObject[]>} vatContract - The vat contract instance.
+ * @param {Web3<RegisteredSubscription>} web3 - The Web3 instance.
+ * @param {string} ilk - The ilk identifier.
+ * @returns {Promise<string | undefined>} - A promise that resolves to the rate in ether, or undefined if an error occurs.
+ */
 export async function getRateForIlk(
   vatContract: Contract<AbiObject[]>,
   web3: Web3<RegisteredSubscription>,
