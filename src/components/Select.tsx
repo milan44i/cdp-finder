@@ -3,9 +3,9 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 import { twMerge } from 'tailwind-merge'
 
 // @ts-expect-error ?react
-import CheckIcon from '../../assets/icons/check.svg?react'
+import CheckIcon from '../assets/icons/check.svg?react'
 // @ts-expect-error ?react
-import ChevronSmallDownIcon from '../../assets/icons/chevron-small-down.svg?react'
+import ChevronSmallDownIcon from '../assets/icons/chevron-small-down.svg?react'
 
 const Select = SelectPrimitive.Root
 const SelectGroup = SelectPrimitive.Group

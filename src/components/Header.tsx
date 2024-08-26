@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 // @ts-expect-error ?react
-import SearchIcon from '../../assets/icons/search.svg?react'
+import SearchIcon from '../assets/icons/search.svg?react'
 
 export default function Header(): ReactElement {
   const [account, setAccount] = useState<string | null>(null)

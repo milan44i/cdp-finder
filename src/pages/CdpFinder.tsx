@@ -1,16 +1,14 @@
 import { ReactElement, useState } from 'react'
 
-import CollateralSelection from './CollateralSection'
-import CdpSearch from './CdpSearch'
-import CdpList from './CdpList'
-import { Progress } from '../../ui/progress/Progress'
+import CollateralSelection from '../components/CollateralSection'
+import CdpSearch from '../components/CdpSearch'
+import CdpList from '../components/CdpList/CdpList'
+import { Progress } from '../components/Progress'
 
-import { getCdpDataClosestToId } from '../../utils/functions'
-import { Cdp, COLLATERAL_TYPE } from '../../utils/types'
-import { useRates } from '../../utils/hooks'
-import { cdpManager } from '../../utils/data'
-
-import './style.css'
+import { getCdpDataClosestToId } from '../utils/functions'
+import { Cdp, COLLATERAL_TYPE } from '../utils/types'
+import { useRates } from '../utils/hooks'
+import { cdpManager } from '../utils/data'
 
 export default function CdpFinder(): ReactElement {
   const [collateralType, setCollateralType] = useState<COLLATERAL_TYPE>(COLLATERAL_TYPE.ETH)
