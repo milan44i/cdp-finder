@@ -52,7 +52,6 @@ export default function CdpFinder(): ReactElement {
           userAddr: cdp.info.userAddr,
         },
       }))
-      console.log('serializedCdps:', serializedCdps)
       localStorage.setItem('cdps', JSON.stringify(serializedCdps))
     } catch (error) {
       console.error('Error fetching CDP data:', error)
