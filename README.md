@@ -40,7 +40,7 @@ Welcome to the CDP Finder, a frontend tool designed to search for Collateralized
 1. Clone the repository:
 
 ```sh
-  git clone https://github.com/yourusername/defi-saver-frontend-challenge.git
+  git clone https://github.com/milan44i/defi-saver-frontend-challenge.git
   cd defi-saver-frontend-challenge
 ```
 
@@ -64,7 +64,7 @@ Welcome to the CDP Finder, a frontend tool designed to search for Collateralized
 
 The following environment variables are required:
 
-`VITE_INFURA_API_BASE_URL`: The base URL for Infura API.
-`VITE_INFURA_API_KEY`: Your Infura API key.
+- `VITE_INFURA_API_BASE_URL`: The base URL for Infura API.
+- `VITE_INFURA_API_KEY`: Your Infura API key.
 
 <img width="1920" alt="Screenshot 2024-08-27 at 11 46 11" src="https://github.com/user-attachments/assets/a7ccfc52-a074-4eaa-b068-9b476cbdd8c3">
