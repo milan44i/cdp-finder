@@ -40,8 +40,8 @@ Welcome to the CDP Finder, a frontend tool designed to search for Collateralized
 1. Clone the repository:
 
 ```sh
-  git clone https://github.com/milan44i/defi-saver-frontend-challenge.git
-  cd defi-saver-frontend-challenge
+  git clone https://github.com/milan44i/cdp-finder.git
+  cd cdp-finder
 ```
 
 2. Install dependencies:
