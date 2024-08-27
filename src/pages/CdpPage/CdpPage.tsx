@@ -61,7 +61,6 @@ export default function CdpPage(): ReactElement {
     {
       label: 'Collateral Type',
       value: collateralType,
-      className: 'col-span-2 md:col-span-3',
     },
     {
       label: 'Collateral Amount',
@@ -89,7 +88,7 @@ export default function CdpPage(): ReactElement {
         <h1 className="text-2xl font-semibold text-blue-950 py-4 border-b">CDP {cdp.id} Details</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 py-4 border-b">
           {items.map((item, index) => (
-            <InfoItem key={index} label={item.label} value={item.value} className={item.className || ''} />
+            <InfoItem key={index} label={item.label} value={item.value} />
           ))}
         </div>
         {isConnected ? (

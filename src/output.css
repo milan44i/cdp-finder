@@ -1122,6 +1122,10 @@ body {
   height: 100%;
 }
 
+.first\:col-span-2:first-child {
+  grid-column: span 2 / span 2;
+}
+
 .last\:border-none:last-child {
   border-style: none;
 }
@@ -1254,6 +1258,10 @@ body {
 
   .md\:gap-0 {
     gap: 0px;
+  }
+
+  .first\:md\:col-span-3:first-child {
+    grid-column: span 3 / span 3;
   }
 }
 

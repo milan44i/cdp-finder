@@ -10,6 +10,10 @@ import { Cdp, COLLATERAL_TYPE, SerializedCdp } from '../utils/types'
 import { useRates } from '../utils/hooks'
 import { cdpManager } from '../utils/data'
 
+const handleBeforeUnload = () => {
+  localStorage.removeItem('cdps')
+}
+
 export default function CdpFinder(): ReactElement {
   const [collateralType, setCollateralType] = useState<COLLATERAL_TYPE>(COLLATERAL_TYPE.ETH)
   const [cdps, setCdps] = useState<Cdp[]>([])
@@ -17,6 +21,7 @@ export default function CdpFinder(): ReactElement {
   const [progress, setProgress] = useState(0)
   const rates = useRates()
 
+  // preserve cdps across navigation (going back from CdpPage)
   useEffect(() => {
     const savedCdps = localStorage.getItem('cdps')
     if (savedCdps) {
@@ -29,6 +34,13 @@ export default function CdpFinder(): ReactElement {
         },
       }))
       setCdps(parsedCdps)
+    }
+
+    // this is to clear the saved cdps when the user refreshes the page
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
     }
   }, [])
 
