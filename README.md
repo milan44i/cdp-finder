@@ -6,5 +6,5 @@ This frontend tool allows you to search for CDPs (Collateralized Debt Positions)
 
 Some tools and libraries used include RadixUI, Tailwind, React Router DOM, Web3.js, Infura, Metamask.
 
-<img width="1326" alt="Screenshot 2024-08-27 at 11 45 37" src="https://github.com/user-attachments/assets/d49d8dde-5ca8-4cce-8bfd-94dd21f43dbd">
+<img width="1920" alt="Screenshot 2024-08-27 at 11 46 11" src="https://github.com/user-attachments/assets/a7ccfc52-a074-4eaa-b068-9b476cbdd8c3">
 
