@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 
 import CollateralSelection from '../components/CollateralSection'
 import CdpSearch from '../components/CdpSearch'
@@ -6,7 +6,7 @@ import CdpList from '../components/CdpList/CdpList'
 import { Progress } from '../components/Progress'
 
 import { getCdpDataClosestToId } from '../utils/functions'
-import { Cdp, COLLATERAL_TYPE } from '../utils/types'
+import { Cdp, COLLATERAL_TYPE, SerializedCdp } from '../utils/types'
 import { useRates } from '../utils/hooks'
 import { cdpManager } from '../utils/data'
 
@@ -17,6 +17,21 @@ export default function CdpFinder(): ReactElement {
   const [progress, setProgress] = useState(0)
   const rates = useRates()
 
+  useEffect(() => {
+    const savedCdps = localStorage.getItem('cdps')
+    if (savedCdps) {
+      const parsedCdps = JSON.parse(savedCdps).map((cdp: SerializedCdp) => ({
+        ...cdp,
+        info: {
+          ...cdp.info,
+          collateral: BigInt(cdp.info.collateral),
+          debt: BigInt(cdp.info.debt),
+        },
+      }))
+      setCdps(parsedCdps)
+    }
+  }, [])
+
   const handleSelectCollateral = (type: COLLATERAL_TYPE) => {
     setCollateralType(type)
   }
@@ -26,6 +41,19 @@ export default function CdpFinder(): ReactElement {
     try {
       const closestCdps = await getCdpDataClosestToId(cdpManager, cdpId, collateralType, setProgress)
       setCdps(closestCdps)
+      const serializedCdps = closestCdps.map((cdp) => ({
+        id: cdp.id,
+        info: {
+          collateral: cdp.info.collateral.toString(),
+          debt: cdp.info.debt.toString(),
+          ilk: cdp.info.ilk,
+          owner: cdp.info.owner,
+          urn: cdp.info.urn,
+          userAddr: cdp.info.userAddr,
+        },
+      }))
+      console.log('serializedCdps:', serializedCdps)
+      localStorage.setItem('cdps', JSON.stringify(serializedCdps))
     } catch (error) {
       console.error('Error fetching CDP data:', error)
     } finally {

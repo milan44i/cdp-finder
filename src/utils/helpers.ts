@@ -1,12 +1,12 @@
-import { COLLATERAL_TYPE } from './types'
+import { Cdp, COLLATERAL_TYPE, SerializedCdp } from './types'
 import { Buffer } from 'buffer'
 
 export const getCollateralPrice = (collateralType: COLLATERAL_TYPE) => {
   switch (collateralType) {
     case COLLATERAL_TYPE.ETH:
-      return 2800
+      return 2682
     case COLLATERAL_TYPE.WBTC:
-      return 64000
+      return 62945
     case COLLATERAL_TYPE.USDC:
       return 1
     default:

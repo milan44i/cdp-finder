@@ -7,9 +7,23 @@ export type CdpInfo = {
   userAddr: string
 }
 
+export type SerializedCdpInfo = {
+  collateral: string
+  debt: string
+  ilk: string
+  owner: string
+  urn: string
+  userAddr: string
+}
+
 export type Cdp = {
   id: number
   info: CdpInfo
+}
+
+export type SerializedCdp = {
+  id: number
+  info: SerializedCdpInfo
 }
 
 type IOType = {
