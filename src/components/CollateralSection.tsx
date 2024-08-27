@@ -19,13 +19,11 @@ export default function CollateralSelection({ onSelect }: CollateralSelectionPro
           <SelectValue placeholder={COLLATERAL_TYPE.ETH} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value={COLLATERAL_TYPE.ETH} className="border-b border-gray-300">
-            {COLLATERAL_TYPE.ETH}
-          </SelectItem>
-          <SelectItem value={COLLATERAL_TYPE.WBTC} className="border-b border-gray-300">
-            {COLLATERAL_TYPE.WBTC}
-          </SelectItem>
-          <SelectItem value={COLLATERAL_TYPE.USDC}>{COLLATERAL_TYPE.USDC}</SelectItem>
+          {Object.values(COLLATERAL_TYPE).map((type) => (
+            <SelectItem key={type} value={type} className="border-b border-gray-200 last:border-none">
+              {type}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
