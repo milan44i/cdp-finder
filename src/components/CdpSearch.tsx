@@ -46,7 +46,7 @@ export default function CdpSearch({ loading, onSearch }: CdpSearchProps): ReactE
       {errorMessage && <p className="mt-2 text-sm text-red-500">{errorMessage}</p>}
       <button
         onClick={handleSearch}
-        className="mt-4 w-full inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="inline-flex justify-center mt-4 w-full py-2 px-4 shadow-sm text-sm font-medium rounded-md bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Search
       </button>
