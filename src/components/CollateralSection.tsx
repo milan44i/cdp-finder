@@ -1,5 +1,7 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './Select'
+
 import { COLLATERAL_TYPE } from '../utils/types'
 
 type CollateralSelectionProps = {

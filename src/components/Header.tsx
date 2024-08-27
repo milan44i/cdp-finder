@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
 // @ts-expect-error ?react
 import SearchIcon from '../assets/icons/search.svg?react'
 
