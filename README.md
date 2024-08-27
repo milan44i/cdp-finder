@@ -38,14 +38,16 @@ Welcome to the CDP Finder, a frontend tool designed to search for Collateralized
 ## Installation
 
 1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/defi-saver-frontend-challenge.git
-   cd defi-saver-frontend-challenge
-   ```
+
+```sh
+  git clone https://github.com/yourusername/defi-saver-frontend-challenge.git
+  cd defi-saver-frontend-challenge
+```
+
 2. Install dependencies:
 
 ```sh
-   npm install
+  npm install
 ```
 
 ## Usage
@@ -53,7 +55,7 @@ Welcome to the CDP Finder, a frontend tool designed to search for Collateralized
 1. Start the development server:
 
 ```sh
-   npm run dev
+  npm run dev
 ```
 
 2. Open your browser and navigate to http://localhost:3000.
