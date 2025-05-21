@@ -1,6 +1,6 @@
 # CDP Finder
 
-Welcome to the CDP Finder, a dApp designed to search for Collateralized Debt Positions (CDPs) on the Ethereum blockchain. This application allows users to connect their Metamask wallet and query CDPs by ID and collateral type, providing detailed information about each CDP, including collateralization ratio, liquidation ratio, maximum debt without liquidation, and maximum collateral without liquidation.
+Welcome to the CDP Finder, a dApp designed to search for Collateralized Debt Positions (CDPs) on the Ethereum blockchain. This application allows users to connect their Metamask wallet and query CDPs by ID and collateral type, providing detailed information about each CDP, including collateralization ratio, liquidation ratio, maximum debt without liquidation, and maximum collateral without liquidation. [Live version](https://cdp-finder.netlify.app/)
 
 ## Table of Contents
 
